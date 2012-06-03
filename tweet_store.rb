@@ -25,7 +25,7 @@ class TweetStore
     @db.lpush(REDIS_KEY, data.to_json)
     @trim_count += 1
     if (@trim_count > TRIM_THRESHOLD)
-      @db.list_trim(REDIS_KEY, 0, NUM_TWEETS)
+      @db.ltrim(REDIS_KEY, 0, NUM_TWEETS)
       @trim_count = 20
     end
   end
